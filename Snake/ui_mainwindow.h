@@ -16,7 +16,6 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QToolBar>
@@ -38,11 +37,9 @@ public:
     QPushButton *pushButton_3;
     QLabel *label;
     QMenuBar *menuBar;
-    QMenu *menusettings;
-    QMenu *menuexit;
-    QMenu *menustart;
     QToolBar *mainToolBar;
     QToolBar *toolBar;
+    QToolBar *toolBar_2;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -155,23 +152,17 @@ public:
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 800, 17));
-        menusettings = new QMenu(menuBar);
-        menusettings->setObjectName(QStringLiteral("menusettings"));
-        menuexit = new QMenu(menuBar);
-        menuexit->setObjectName(QStringLiteral("menuexit"));
-        menustart = new QMenu(menuBar);
-        menustart->setObjectName(QStringLiteral("menustart"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         toolBar = new QToolBar(MainWindow);
         toolBar->setObjectName(QStringLiteral("toolBar"));
+        toolBar->setEnabled(false);
         MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
-
-        menuBar->addAction(menustart->menuAction());
-        menuBar->addAction(menusettings->menuAction());
-        menuBar->addAction(menuexit->menuAction());
+        toolBar_2 = new QToolBar(MainWindow);
+        toolBar_2->setObjectName(QStringLiteral("toolBar_2"));
+        MainWindow->addToolBar(Qt::TopToolBarArea, toolBar_2);
 
         retranslateUi(MainWindow);
 
@@ -193,10 +184,8 @@ public:
         pushButton_2->setText(QApplication::translate("MainWindow", "\351\200\211\351\241\271", Q_NULLPTR));
         pushButton_3->setText(QApplication::translate("MainWindow", "\351\200\200\345\207\272", Q_NULLPTR));
         label->setText(QString());
-        menusettings->setTitle(QApplication::translate("MainWindow", "settings", Q_NULLPTR));
-        menuexit->setTitle(QApplication::translate("MainWindow", "exit", Q_NULLPTR));
-        menustart->setTitle(QApplication::translate("MainWindow", "start", Q_NULLPTR));
         toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", Q_NULLPTR));
+        toolBar_2->setWindowTitle(QApplication::translate("MainWindow", "toolBar_2", Q_NULLPTR));
     } // retranslateUi
 
 };

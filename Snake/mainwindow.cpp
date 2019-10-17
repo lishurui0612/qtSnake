@@ -15,8 +15,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-dialog=new Dialog(this);
-dialog->show();
+    dialog=new Dialog(this);
+    dialog->show();
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -27,6 +27,5 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_3_clicked()
 {
-
-    exit(1);
+    this->close();
 }

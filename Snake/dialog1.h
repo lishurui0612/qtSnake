@@ -17,7 +17,6 @@ public:
     ~Dialog1();
 
 private slots:
-    void on_pushButton_clicked();//开始游戏
 
     void on_pushButton_2_clicked();//返回主界面
 
@@ -26,7 +25,7 @@ public:
 
 private:
     Ui::Dialog1 *ui;
-    GamePanel *gamepanel;
+
 
 };
 

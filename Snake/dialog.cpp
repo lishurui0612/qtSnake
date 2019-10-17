@@ -15,19 +15,19 @@ Dialog::~Dialog()
 
 void Dialog::on_pushButton_clicked()//人机
 {
-    gamepanel=new GamePanel(this);//此处记得区分难度
+    gamepanel=new GamePanel(1,5,this);//此处记得区分难度
     gamepanel->show();
-    this->hide();
+    this->close();
 }
 
 void Dialog::on_pushButton_2_clicked()
 {
-    gamepanel=new GamePanel(this);
+    gamepanel=new GamePanel(2,5,this);
     gamepanel->show();
-    this->hide();
+    this->close();
 }
 
 void Dialog::on_pushButton_3_clicked()
 {
-    this->hide();
+    this->close();
 }

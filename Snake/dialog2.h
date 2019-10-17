@@ -10,10 +10,14 @@ class Dialog2;
 class Dialog2 : public QDialog
 {
     Q_OBJECT
-
 public:
-    explicit Dialog2(QWidget *parent = 0);
+    int currentscore;
+public:
+    explicit Dialog2(QString str,int currentscore, QWidget *parent = 0);
     ~Dialog2();
+
+private slots:
+    void on_pushButton_clicked();
 
 private:
     Ui::Dialog2 *ui;

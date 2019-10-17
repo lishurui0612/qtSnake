@@ -1,0 +1,6 @@
+
+admin  0
+he  10
+zt  10
+yyc  10
+admin  20

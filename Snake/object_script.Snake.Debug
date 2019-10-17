@@ -5,10 +5,12 @@ INPUT(
 ./debug\dialog1.o
 ./debug\dialog2.o
 ./debug\gamepanel.o
+./debug\dialog3.o
 ./debug\qrc_snake.o
 ./debug\moc_mainwindow.o
 ./debug\moc_dialog.o
 ./debug\moc_dialog1.o
 ./debug\moc_dialog2.o
 ./debug\moc_gamepanel.o
+./debug\moc_dialog3.o
 );

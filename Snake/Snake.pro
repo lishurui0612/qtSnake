@@ -28,19 +28,22 @@ SOURCES += main.cpp\
     dialog.cpp \
     dialog1.cpp \
     dialog2.cpp \
-    gamepanel.cpp
+    gamepanel.cpp \
+    dialog3.cpp
 
 HEADERS  += mainwindow.h \
     dialog.h \
     dialog1.h \
     dialog2.h \
-    gamepanel.h
+    gamepanel.h \
+    dialog3.h
 
 FORMS    += mainwindow.ui \
     dialog.ui \
     dialog1.ui \
     dialog2.ui \
-    gamepanel.ui
+    gamepanel.ui \
+    dialog3.ui
 
 RESOURCES += \
     snake.qrc
