@@ -3,9 +3,8 @@
 #include <time.h>
 #include <random>
 #include <vector>
-#include <iostream>
-#include <windows.h>
 #include <QPainter>
+#include <windows.h>
 
 
 #include "gamepanel.h"
@@ -18,13 +17,14 @@
 int max_fps=1;
 int difficulty;
 bool difficultyChanged;
+bool paused=false;
 int board[15][15];
 int ai_board[15][15];
 std::vector<std::pair<int,int> > snake;
 std::vector<std::pair<int,int> > ai_snake;
 int currentFrame;
 std::vector<int> direction;
-int last_direction;
+int last_direction=0;
 std::pair<int,int> food;
 int score;
 QTimer* timer=new QTimer();
@@ -41,12 +41,12 @@ void GamePanel::paintEvent(QPaintEvent*)
 
     QColor black=QColor(0,0,0);
     painter.setBrush(QBrush(black,Qt::SolidPattern));//设置画刷形式
-    if (last_direction==1 || last_direction==2)
+    if (last_direction<=2)
     {
         painter.drawEllipse(QPointF(60*snake[0].first+35,60*snake[0].second+50),5,5);
         painter.drawEllipse(QPointF(60*snake[0].first+65,60*snake[0].second+50),5,5);
     }
-    if (last_direction==3 || last_direction==4)
+    if (last_direction>2)
     {
         painter.drawEllipse(QPointF(60*snake[0].first+50,60*snake[0].second+35),5,5);
         painter.drawEllipse(QPointF(60*snake[0].first+50,60*snake[0].second+65),5,5);
@@ -87,6 +87,8 @@ std::pair<int,int> GamePanel::generateFood()
 
 void GamePanel::snake_move()
 {
+    if(paused)
+        return;
     if (difficultyChanged)
     {
         timer->stop();
@@ -149,7 +151,6 @@ GamePanel::GamePanel(QWidget *parent) :
     board[7][7]=1;
     board[7][8]=1;
     food=generateFood();
-    last_direction=1;
     difficulty=5;
 
 
@@ -192,6 +193,8 @@ void GamePanel::keyPressEvent(QKeyEvent *ev)
             difficulty--;
             difficultyChanged=true;
         }
+    if(ev->key() == Qt::Key_Space)
+        paused=!paused;
     QWidget::keyPressEvent(ev);
 }
 
