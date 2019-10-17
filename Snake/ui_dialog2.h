@@ -37,6 +37,7 @@ public:
         label = new QLabel(Dialog2);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(350, 50, 100, 71));
+        label->setStyleSheet(QStringLiteral(" color:rgba(0,129,43,200);                                                                 "));
 
         retranslateUi(Dialog2);
 

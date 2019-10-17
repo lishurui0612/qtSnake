@@ -49,6 +49,7 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(800, 600);
+        MainWindow->setStyleSheet(QStringLiteral(""));
         actiondsf = new QAction(MainWindow);
         actiondsf->setObjectName(QStringLiteral("actiondsf"));
         action2p = new QAction(MainWindow);
@@ -64,23 +65,93 @@ public:
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(300, 150, 150, 50));
+        pushButton->setStyleSheet(QLatin1String("QPushButton{\n"
+"                   background-color:rgb(150,255,150);\n"
+"                   border-style:outset;                \n"
+"                   border-width:8px;                   \n"
+"                   border-radius:18px;                   \n"
+"                   border-color:rgb(255,255,255);\n"
+"                   font:bold 20px; \n"
+"				 color:rgba(102,255,129,200);                                                                 \n"
+"                   padding:6px;                          \n"
+"                   \n"
+"}\n"
+" QPushButton:pressed{\n"
+"                   background-color:rgba(100,200,150,200);\n"
+"                   border-color:rgba(255,255,255,30);\n"
+"                   border-style:inset;\n"
+"                   color:rgba(255,127,0,100);\n"
+"                   }\n"
+"                 \n"
+" QPushButton:hover{\n"
+" 				background-color:rgba(100,255,150,200);\n"
+"                  border-color:rgba(255,255,255,200);\n"
+"                  color:rgba(255,127,0,200);\n"
+"            "
+                        "       }"));
+        pushButton->setAutoDefault(false);
+        pushButton->setFlat(false);
         pushButton_2 = new QPushButton(centralWidget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
         pushButton_2->setGeometry(QRect(300, 250, 150, 50));
+        pushButton_2->setStyleSheet(QLatin1String("QPushButton{\n"
+"                   background-color:rgb(150,255,150);\n"
+"                   border-style:outset;                \n"
+"                   border-width:8px;                   \n"
+"                   border-radius:18px;                   \n"
+"                   border-color:rgb(255,255,255);\n"
+"                   font:bold 20px; \n"
+"				 color:rgba(102,255,129,200);                                                                 \n"
+"                   padding:6px;                          \n"
+"                   \n"
+"}\n"
+" QPushButton:pressed{\n"
+"                   background-color:rgba(100,200,150,200);\n"
+"                   border-color:rgba(255,255,255,30);\n"
+"                   border-style:inset;\n"
+"                   color:rgba(255,127,0,100);\n"
+"                   }\n"
+"                 \n"
+" QPushButton:hover{\n"
+" 				background-color:rgba(100,255,150,200);\n"
+"                  border-color:rgba(255,255,255,200);\n"
+"                  color:rgba(255,127,0,200);\n"
+"            "
+                        "       }"));
         pushButton_3 = new QPushButton(centralWidget);
         pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
         pushButton_3->setGeometry(QRect(300, 350, 150, 50));
+        pushButton_3->setStyleSheet(QLatin1String("QPushButton{\n"
+"                   background-color:rgb(150,255,150);\n"
+"                   border-style:outset;                \n"
+"                   border-width:8px;                   \n"
+"                   border-radius:18px;                   \n"
+"                   border-color:rgb(255,255,255);\n"
+"                   font:bold 20px; \n"
+"				 color:rgba(102,255,129,200);                                                                 \n"
+"                   padding:6px;                          \n"
+"                   \n"
+"}\n"
+" QPushButton:pressed{\n"
+"                   background-color:rgba(100,200,150,200);\n"
+"                   border-color:rgba(255,255,255,30);\n"
+"                   border-style:inset;\n"
+"                   color:rgba(255,127,0,100);\n"
+"                   }\n"
+"                 \n"
+" QPushButton:hover{\n"
+" 				background-color:rgba(100,255,150,200);\n"
+"                  border-color:rgba(255,255,255,200);\n"
+"                  color:rgba(255,127,0,200);\n"
+"            "
+                        "       }"));
         pushButton_3->setIconSize(QSize(100, 12));
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(250, 10, 300, 81));
         label->setMinimumSize(QSize(0, 0));
-        label->setPixmap(QPixmap(QString::fromUtf8("Snake.PNG")));
+        label->setPixmap(QPixmap(QString::fromUtf8("155d36ce885a4b20899a81a28e284bfa.PNG")));
         MainWindow->setCentralWidget(centralWidget);
-        pushButton_2->raise();
-        pushButton_3->raise();
-        pushButton->raise();
-        label->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 800, 17));
@@ -104,6 +175,9 @@ public:
 
         retranslateUi(MainWindow);
 
+        pushButton->setDefault(false);
+
+
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
@@ -115,7 +189,7 @@ public:
         actionstart->setText(QApplication::translate("MainWindow", "start", Q_NULLPTR));
         actionpause->setText(QApplication::translate("MainWindow", "setting", Q_NULLPTR));
         actionexit->setText(QApplication::translate("MainWindow", "exit", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("MainWindow", "\345\215\225\346\234\272", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("MainWindow", "\345\274\200\345\247\213", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MainWindow", "\351\200\211\351\241\271", Q_NULLPTR));
         pushButton_3->setText(QApplication::translate("MainWindow", "\351\200\200\345\207\272", Q_NULLPTR));
         label->setText(QString());

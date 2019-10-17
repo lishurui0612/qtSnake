@@ -26,3 +26,8 @@ void Dialog::on_pushButton_2_clicked()
     gamepanel->show();
     this->hide();
 }
+
+void Dialog::on_pushButton_3_clicked()
+{
+    this->hide();
+}

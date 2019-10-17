@@ -21,13 +21,12 @@ private slots:
 
     void on_pushButton_2_clicked();//返回主界面
 
-    int on_spinBox_valueChanged();
 public:
     QSpinBox* box;
 
 private:
     Ui::Dialog1 *ui;
-    GamePanel* gamepanel;
+    GamePanel *gamepanel;
 
 };
 
