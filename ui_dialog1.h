@@ -79,7 +79,7 @@ public:
         spinBox->setValue(5);
         label_3 = new QLabel(Dialog1);
         label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(290, 130, 251, 81));
+        label_3->setGeometry(QRect(210, 130, 391, 81));
         label_3->setMinimumSize(QSize(80, 40));
         label_3->setStyleSheet(QStringLiteral(" color:rgba(102,255,129,200);                                                                 "));
 
@@ -90,7 +90,7 @@ public:
 
     void retranslateUi(QDialog *Dialog1)
     {
-        Dialog1->setWindowTitle(QApplication::translate("Dialog1", "Dialog", Q_NULLPTR));
+        Dialog1->setWindowTitle(QApplication::translate("Dialog1", "Options", Q_NULLPTR));
         label->setText(QApplication::translate("Dialog1", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt; font-weight:600;\">Speed Options</span></p></body></html>", Q_NULLPTR));
         label_2->setText(QString());
         pushButton_2->setText(QApplication::translate("Dialog1", "\350\277\224\345\233\236", Q_NULLPTR));

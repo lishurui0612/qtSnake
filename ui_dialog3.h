@@ -50,7 +50,7 @@ public:
 
     void retranslateUi(QDialog *Dialog3)
     {
-        Dialog3->setWindowTitle(QApplication::translate("Dialog3", "Dialog", Q_NULLPTR));
+        Dialog3->setWindowTitle(QApplication::translate("Dialog3", "Enter your nickname", Q_NULLPTR));
         label->setText(QApplication::translate("Dialog3", "\350\257\267\350\276\223\345\205\245\346\202\250\347\232\204\346\230\265\347\247\260\357\274\232", Q_NULLPTR));
         pushButton->setText(QApplication::translate("Dialog3", "\347\241\256\345\256\232", Q_NULLPTR));
     } // retranslateUi

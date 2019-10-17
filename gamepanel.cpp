@@ -6,9 +6,8 @@
 #include <QPainter>
 #include <string.h>
 #include <windows.h>
-#include <iostream>
-#include <cstdio>
 #include <dialog3.h>
+#include <iostream>
 
 #include "gamepanel.h"
 #include "ui_gamepanel.h"
@@ -17,18 +16,21 @@
 #define random(x) rand()%(x)
 
 int max_fps=1;
-int difficulty;
+int difficulty=5;
 bool difficultyChanged;
 bool paused=false;
 
-//int ai_this->board[15][15];
 
 std::vector<std::pair<int,int> > snake;
-//std::vector<std::pair<int,int> > ai_snake;
+std::vector<std::pair<int,int> > ai_snake;
 std::vector<int> direction;
 int last_direction=0;
+int ai_direction=0;
+bool ai_snake_die=false;
 std::pair<int,int> food;
+std::pair<int,int> ai_food;
 int score=0;
+int ai_score=0;
 
 void GamePanel::paintEvent(QPaintEvent*)
 //paintEvent函数由系统自动调用，用不着我们人为的去调用。
@@ -38,6 +40,8 @@ void GamePanel::paintEvent(QPaintEvent*)
     QColor blue=QColor(130,200,250);
     painter.setBrush(QBrush(blue,Qt::SolidPattern));//设置画刷形式
     painter.drawRect(60*snake[0].first+25,60*snake[0].second+25,50,50);
+    if (this->mode==2)
+        painter.drawRect(60*ai_snake[0].first+965,60*ai_snake[0].second+25,50,50);
 
     QColor black=QColor(0,0,0);
     painter.setBrush(QBrush(black,Qt::SolidPattern));//设置画刷形式
@@ -51,27 +55,52 @@ void GamePanel::paintEvent(QPaintEvent*)
         painter.drawEllipse(QPointF(60*snake[0].first+50,60*snake[0].second+35),5,5);
         painter.drawEllipse(QPointF(60*snake[0].first+50,60*snake[0].second+65),5,5);
     }
+    if (mode==2)
+    {
+        if (ai_direction<=2)
+        {
+            painter.drawEllipse(QPointF(60*ai_snake[0].first+975,60*ai_snake[0].second+50),5,5);
+            painter.drawEllipse(QPointF(60*ai_snake[0].first+1005,60*ai_snake[0].second+50),5,5);
+        }
+        if (ai_direction>2)
+        {
+            painter.drawEllipse(QPointF(60*ai_snake[0].first+990,60*ai_snake[0].second+35),5,5);
+            painter.drawEllipse(QPointF(60*ai_snake[0].first+990,60*ai_snake[0].second+65),5,5);
+        }
+    }
 
 // TODO triangle tail
     painter.setBrush(QBrush(Qt::green,Qt::SolidPattern));
       if (snake.size()>1)
           for (unsigned int i=0;i<snake.size()-1;i++)
               if (snake[i].first==snake[i+1].first)
-              {
                   painter.drawRect((snake[i].first+snake[i+1].first)/2*60+25,(snake[i].second+snake[i+1].second)/2*60+75,50,10);
-              }
               else
-              {
                   painter.drawRect((snake[i].first+snake[i+1].first)/2*60+75,(snake[i].second+snake[i+1].second)/2*60+25,10,50);
-              }
+    if (mode==2)
+        if (ai_snake.size()>1)
+            for (unsigned int i=0;i<ai_snake.size()-1;i++)
+                if (ai_snake[i].first==ai_snake[i+1].first)
+                    painter.drawRect((ai_snake[i].first+ai_snake[i+1].first)/2*60+965,(ai_snake[i].second+ai_snake[i+1].second)/2*60+75,50,10);
+                else
+                    painter.drawRect((ai_snake[i].first+ai_snake[i+1].first)/2*60+1015,(ai_snake[i].second+ai_snake[i+1].second)/2*60+25,10,50);
 
     QColor darkBlue=QColor(160,220,250);
     painter.setBrush(QBrush(darkBlue,Qt::SolidPattern));//设置画刷形式
     for (unsigned int i=1;i<snake.size();i++)
         painter.drawRect(60*snake[i].first+25,60*snake[i].second+25,50,50);
+    if (mode==2)
+        for (unsigned int i=1;i<ai_snake.size();i++)
+            painter.drawRect(60*ai_snake[i].first+965,60*ai_snake[i].second+25,50,50);
+
 
     painter.setBrush(QBrush(Qt::red,Qt::SolidPattern));//设置画刷形式
     painter.drawRect(60*food.first+25,60*food.second+25,50,50);
+    if (mode==2)
+        painter.drawRect(60*ai_food.first+965,60*ai_food.second+25,50,50);
+
+    painter.setBrush(QBrush(Qt::black,Qt::SolidPattern));
+    painter.drawRect(930,0,10,930);
     painter.end();
 }
 
@@ -99,6 +128,79 @@ std::pair<int,int> GamePanel::generateFood()
     return tmp[tmpp];
 }
 
+std::pair<int,int> GamePanel::ai_generateFood()
+{
+    std::vector<std::pair<int,int> > tmp;
+    tmp.clear();
+    for (int i=0;i<15;i++)
+        for (int j=0;j<15;j++)
+        {
+//            if (i==0 || j==0 || i==14 || j==14)
+            if (this->ai_board[i][j]==0)
+                tmp.push_back(std::make_pair(i,j));
+        }
+    int tmpp=random(tmp.size());
+    ai_board[tmp[tmpp].first][tmp[tmpp].second]=2;
+    return tmp[tmpp];
+}
+
+int GamePanel::change_aiDirection()
+{
+//    if (ai_snake[0].second==0)
+//        ai_direction=4;
+//    if (ai_snake[0].first==14)
+//        ai_direction=2;
+//    if (ai_snake[0].second==14)
+//        ai_direction=3;
+//    if (ai_snake[0].first==0)
+//        ai_direction=1;
+//    if (ai_snake[0].first==0 && ai_snake[0].second==0)
+//        ai_direction=4;
+    if (ai_food.second>ai_snake[0].second)
+        ai_direction=2;
+    if (ai_food.second<ai_snake[0].second)
+        ai_direction=1;
+    if (ai_food.first>ai_snake[0].first)
+        ai_direction=4;
+    if (ai_food.first<ai_snake[0].first)
+        ai_direction=3;
+//    std::cout<<ai_snake[0].first;
+    return ai_direction;
+}
+
+void GamePanel::ai_snake_move()
+{
+    if (!ai_direction)
+        return;
+    if (ai_snake_die)
+        return;
+    int dx[]={0,0,0,-1,1};
+    int dy[]={0,-1,1,0,0};
+    ai_direction=change_aiDirection();
+    for (int i=1;i<=4;i++)
+        if (ai_direction==i)
+        {
+            for (int j=1;j<ai_snake.size();j++)
+                if(ai_snake[0].first+dx[i]==ai_snake[j].first && ai_snake[0].second+dy[i]==ai_snake[j].second)
+                    ai_snake_die=true;
+            if (ai_snake_die)
+                break;
+            ai_snake.insert(ai_snake.begin(),std::make_pair(ai_snake[0].first+dx[i],ai_snake[0].second+dy[i]));
+            if (ai_snake[0]==ai_food)
+            {
+                ai_food=ai_generateFood();
+                ai_score+=10;
+//                ui->label->setNum(score);
+            }
+            else
+            {
+                this->ai_board[ai_snake.back().first][ai_snake.back().second]=0;
+                ai_snake.pop_back();
+            }
+            this->ai_board[ai_snake[0].first][ai_snake[0].second]=1;
+        }
+//    std::cout<<ai_score;
+}
 
 void GamePanel::snake_move()
 {
@@ -109,7 +211,7 @@ void GamePanel::snake_move()
     if (difficultyChanged)
     {
         this->timer->stop();
-        this->timer->start(1000/difficulty);
+        this->timer->start(500/difficulty);
         difficultyChanged=false;
     }
     int choosedWay=0;
@@ -123,26 +225,24 @@ void GamePanel::snake_move()
                 choosedWay=(*it);
         direction.clear();
     }
+
     if (choosedWay==0)
         choosedWay=last_direction;
     else
+    {
         last_direction=choosedWay;
+        if (mode==2)
+            ai_direction=1;
+    }
     for (int i=1;i<5;i++)
     {
         if (choosedWay==i)
         {
             if (snake[0].first+dx[i]<0 || snake[0].first+dx[i]>=15 || snake[0].second+dy[i]<0 || snake[0].second+dy[i]>=15)
-            {
-                //std::cout<<1;
                 endGame();
-            }
             if (this->board[snake[0].first+dx[i]][snake[0].second+dy[i]]==1)
-            {
-                //std::cout<<snake[0].first+dx[i]<<snake[0].second+dy[i];
                 endGame();
-            }
             snake.insert(snake.begin(),std::make_pair(snake[0].first+dx[i],snake[0].second+dy[i]));
-            //printf("%d %d\n",dx[i],dy[i]);
             if (snake[0]==food)
             {
                 food=generateFood();
@@ -157,12 +257,14 @@ void GamePanel::snake_move()
             this->board[snake[0].first][snake[0].second]=1;
         }
     }
+    if (mode==2)
+        GamePanel::ai_snake_move();
     GamePanel::update();
 }
 
 
 
-GamePanel::GamePanel(int mode,int difficulty,QWidget *parent) :
+GamePanel::GamePanel(int mode,QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GamePanel)
 {
@@ -172,7 +274,13 @@ GamePanel::GamePanel(int mode,int difficulty,QWidget *parent) :
     //初始化变量
     memset(this->board,0,sizeof(this->board));
     snake.clear();
+    ai_snake.clear();
     direction.clear();
+
+    this->mode=mode;
+    if (this->mode==2) this->setFixedSize(1880,930);
+    else this->setFixedSize(930,930);
+
     score=0;
     last_direction=0;
     snake.push_back(std::make_pair(7,7));
@@ -180,14 +288,22 @@ GamePanel::GamePanel(int mode,int difficulty,QWidget *parent) :
     this->board[7][7]=1;
     this->board[7][8]=1;
     food=generateFood();
-    difficulty=5;
-    this->mode=mode;
-    if (this->mode==2) this->setFixedSize(1880,930);
-    else this->setFixedSize(930,930);
+
+    if (mode==2)
+    {
+        ai_score=0;
+        ai_direction=0;
+        ai_snake.push_back(std::make_pair(7,7));
+        ai_snake.push_back(std::make_pair(7,8));
+        this->ai_board[7][7]=1;
+        this->ai_board[7][8]=1;
+        ai_food=ai_generateFood();
+//        std::cout<<ai_food.first<<' '<<ai_food.second;
+    }
 
     timer=new QTimer(this);
     connect(this->timer,SIGNAL(timeout()),this,SLOT(snake_move()));
-    this->timer->start(1000/difficulty);
+    this->timer->start(500/difficulty);
     QPalette palette(this->palette());
     palette.setColor(QPalette::Background, Qt::white);
     this->setPalette(palette);

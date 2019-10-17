@@ -27,14 +27,14 @@ class Ui_Dialog2
 public:
     QLabel *label;
     QPushButton *pushButton;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout;
     QLabel *label_2;
     QLabel *label_3;
     QLabel *label_4;
     QLabel *label_5;
     QLabel *label_6;
-    QWidget *widget1;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout_2;
     QLabel *label_7;
     QLabel *label_8;
@@ -78,74 +78,74 @@ public:
 "                  color:rgba(255,127,0,200);\n"
 "            "
                         "       }"));
-        widget = new QWidget(Dialog2);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(250, 131, 92, 241));
-        verticalLayout = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(Dialog2);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(250, 131, 92, 241));
+        verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        label_2 = new QLabel(widget);
+        label_2 = new QLabel(layoutWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setStyleSheet(QStringLiteral("font:20px"));
 
         verticalLayout->addWidget(label_2);
 
-        label_3 = new QLabel(widget);
+        label_3 = new QLabel(layoutWidget);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setStyleSheet(QLatin1String("font:20px\n"
 ""));
 
         verticalLayout->addWidget(label_3);
 
-        label_4 = new QLabel(widget);
+        label_4 = new QLabel(layoutWidget);
         label_4->setObjectName(QStringLiteral("label_4"));
         label_4->setStyleSheet(QStringLiteral("font:20px"));
 
         verticalLayout->addWidget(label_4);
 
-        label_5 = new QLabel(widget);
+        label_5 = new QLabel(layoutWidget);
         label_5->setObjectName(QStringLiteral("label_5"));
         label_5->setStyleSheet(QStringLiteral("font:20px"));
 
         verticalLayout->addWidget(label_5);
 
-        label_6 = new QLabel(widget);
+        label_6 = new QLabel(layoutWidget);
         label_6->setObjectName(QStringLiteral("label_6"));
         label_6->setStyleSheet(QStringLiteral("font:20px"));
 
         verticalLayout->addWidget(label_6);
 
-        widget1 = new QWidget(Dialog2);
-        widget1->setObjectName(QStringLiteral("widget1"));
-        widget1->setGeometry(QRect(450, 130, 92, 241));
-        verticalLayout_2 = new QVBoxLayout(widget1);
+        layoutWidget1 = new QWidget(Dialog2);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(450, 130, 92, 241));
+        verticalLayout_2 = new QVBoxLayout(layoutWidget1);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        label_7 = new QLabel(widget1);
+        label_7 = new QLabel(layoutWidget1);
         label_7->setObjectName(QStringLiteral("label_7"));
         label_7->setStyleSheet(QStringLiteral("font:20px"));
 
         verticalLayout_2->addWidget(label_7);
 
-        label_8 = new QLabel(widget1);
+        label_8 = new QLabel(layoutWidget1);
         label_8->setObjectName(QStringLiteral("label_8"));
         label_8->setStyleSheet(QStringLiteral("font:20px"));
 
         verticalLayout_2->addWidget(label_8);
 
-        label_9 = new QLabel(widget1);
+        label_9 = new QLabel(layoutWidget1);
         label_9->setObjectName(QStringLiteral("label_9"));
         label_9->setStyleSheet(QStringLiteral("font:20px"));
 
         verticalLayout_2->addWidget(label_9);
 
-        label_10 = new QLabel(widget1);
+        label_10 = new QLabel(layoutWidget1);
         label_10->setObjectName(QStringLiteral("label_10"));
         label_10->setStyleSheet(QStringLiteral("font:20px"));
 
         verticalLayout_2->addWidget(label_10);
 
-        label_11 = new QLabel(widget1);
+        label_11 = new QLabel(layoutWidget1);
         label_11->setObjectName(QStringLiteral("label_11"));
         label_11->setStyleSheet(QStringLiteral("font:20px"));
 
@@ -159,7 +159,7 @@ public:
 
     void retranslateUi(QDialog *Dialog2)
     {
-        Dialog2->setWindowTitle(QApplication::translate("Dialog2", "Dialog", Q_NULLPTR));
+        Dialog2->setWindowTitle(QApplication::translate("Dialog2", "Hall of Fame", Q_NULLPTR));
         label->setText(QApplication::translate("Dialog2", "<html><head/><body><p align=\"center\"><span style=\" font-size:20pt;\">\345\220\215\344\272\272\345\240\202</span></p></body></html>", Q_NULLPTR));
         pushButton->setText(QApplication::translate("Dialog2", "\347\241\256\345\256\232", Q_NULLPTR));
         label_2->setText(QApplication::translate("Dialog2", "TextLabel", Q_NULLPTR));

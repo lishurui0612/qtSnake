@@ -128,7 +128,7 @@ public:
 
     void retranslateUi(QDialog *Dialog)
     {
-        Dialog->setWindowTitle(QApplication::translate("Dialog", "Dialog", Q_NULLPTR));
+        Dialog->setWindowTitle(QApplication::translate("Dialog", "Mode Select", Q_NULLPTR));
         label->setText(QApplication::translate("Dialog", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600;\">Select Game Mode</span></p></body></html>", Q_NULLPTR));
         pushButton->setText(QApplication::translate("Dialog", "\345\215\225\344\272\272", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("Dialog", "\344\272\272\346\234\272", Q_NULLPTR));

@@ -51,7 +51,7 @@ public:
         GamePanel->setCentralWidget(centralwidget);
         menubar = new QMenuBar(GamePanel);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 930, 23));
+        menubar->setGeometry(QRect(0, 0, 930, 19));
         GamePanel->setMenuBar(menubar);
         statusbar = new QStatusBar(GamePanel);
         statusbar->setObjectName(QStringLiteral("statusbar"));
@@ -64,7 +64,7 @@ public:
 
     void retranslateUi(QMainWindow *GamePanel)
     {
-        GamePanel->setWindowTitle(QApplication::translate("GamePanel", "MainWindow", Q_NULLPTR));
+        GamePanel->setWindowTitle(QApplication::translate("GamePanel", "Greedy Snake", Q_NULLPTR));
         label->setText(QString());
         label_2->setText(QApplication::translate("GamePanel", "score", Q_NULLPTR));
     } // retranslateUi
